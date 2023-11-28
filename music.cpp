@@ -1,0 +1,38 @@
+#include <iostream>
+#include <cstring>
+#include "music.h"
+
+using namespace std;
+
+music::music() {
+  artist = new char[40];
+  publisher = new char[40];
+  int duration = 0;
+}
+
+void music::newArtist(char* newartist) {
+  artist = new char[40];
+  strcpy(artist, newartist);
+}
+
+void music::newPublisher(char* newpublisher) {
+  publisher = new char[40];
+  strcpy(publisher, newpublisher);
+}
+
+void music::newDuration(int newduration) {
+  duration = 0;
+  duration = newduration;
+}
+
+char* music::getArtist() {
+  return artist;
+}
+
+char* music::getPublisher() {
+  return publisher;
+}
+
+int music::getDuration() {
+  return duration;
+}

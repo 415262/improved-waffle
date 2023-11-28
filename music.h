@@ -1,0 +1,25 @@
+#ifndef MUSIC_H
+#define MUSIC_H
+
+#include <iostream>
+#include <cstring>
+#include "media.h"
+
+using namespace std;
+
+class music : public media {
+ public:
+  music();
+  void newArtist(char*);
+  void newPublisher(char*);
+  void newDuration(int);
+  char* getArtist();
+  char* getPublisher();
+  int getDuration();
+ protected:
+  char* artist;
+  char* publisher;
+  int duration;
+};
+
+#endif
