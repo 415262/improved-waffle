@@ -1,0 +1,21 @@
+#ifndef GAMES_H
+#define GAMES_H
+
+#include <iostream>
+#include <cstring>
+#include "media.h"
+
+using namespace std;
+
+class games : public media {
+ public:
+  games();
+  games(char*);
+  char* getPublisher();
+  int getRating();
+ protected:
+  char* publisher;
+  int rating;
+};
+
+#endif

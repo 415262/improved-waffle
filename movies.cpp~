@@ -1,0 +1,29 @@
+#include <iostream>
+#include <cstring>
+#include "movies.h"
+
+using namespace std;
+
+movies::movies() {
+  director = new char[40];
+  rating = 0;
+  duration = 0;
+};
+
+movies::movies(char* newdirector) {
+  director = new char[40];
+  strcpy(director, newdirector);
+  rating = 0;
+};
+
+char* movies::getDirector() {
+  return director;
+}
+
+int movies::getRating() {
+  return rating;
+}
+
+int movies::getDuration() {
+  return duration;
+}

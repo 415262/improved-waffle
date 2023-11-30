@@ -1,0 +1,24 @@
+#include <iostream>
+#include <cstring>
+#include "games.h"
+
+using namespace std;
+
+games::games() {
+  publisher = new char[40];
+  rating = 0;
+}
+
+games::games(char* newpublisher) {
+  publisher = new char[40];
+  strcpy(publisher, newpublisher);
+  rating = 0;
+}
+
+char* games::getPublisher() {
+  return publisher;
+}
+
+int games::getRating() {
+  return rating;
+}

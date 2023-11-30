@@ -1,0 +1,189 @@
+#include <iostream>
+//#include <cstring>
+#include <vector>
+
+#include "media.h"
+#include "movies.h"
+#include "music.h"
+#include "games.h"
+
+using namespace std;
+string input;
+char* charinput;
+int intput; //int input, it's a pun!
+int mediaType; //tracks media type during ADD
+string delInput;
+bool isRunning = true;
+media* list[10];
+string tempTitle;
+int tempYear;
+vector<media*>::iterator pointer;
+
+void addMedia(vector<media*>&);
+void printMedia(vector<media*>&);
+void deleteMedia();
+
+int main() {
+  vector<media*> mediaList;
+  cout << "Running." << endl;
+  while (isRunning) {
+    
+    cout << "ADD, SEARCH, DELETE a media, or QUIT program." << endl;
+    
+    cin >> input;
+    
+    if (input == "QUIT" || input == "quit") {
+      return 0;
+    }
+    
+    else {
+      
+      while (input != "quit" || input != "QUIT") {
+      
+	if (input == "ADD" || input == "add") {
+	  //media* m = new media();
+	  addMedia(mediaList);
+	  break;
+	}
+
+	else if (input == "SEARCH" || input == "search") {
+
+	  //cout << "Search by title or year" << endl;
+	  //cin >> input;
+	  printMedia(mediaList);
+	  break;
+	  
+	}
+
+	else if (input == "DELETE" || input == "delete") {
+
+	  cout << "Delete by title or year" << endl;
+	  cin >> delInput;
+	  printMedia(mediaList);
+	  cout << "Delete all listed here? (y/n)" << endl;
+	  cin >> input;
+	  if (input == "y" || input == "Y") {
+	    deleteMedia();
+	    break;
+	  }
+	  else {
+	    break;
+	  }
+	  
+	}
+
+        continue;
+       
+      }//while input != quit
+            
+    }//if first input != quit
+    
+  }//while (isRunning = true);
+  
+  return 0;
+
+}//main();
+
+void addMedia(vector<media*>&mediaList) {
+
+  cout << "Make a game (1), film (2), or song (3)?" << endl << "Type 1-3: ";
+  cin >> mediaType;
+
+  cout << "What is it called?" << endl;
+  cin >> (tempTitle);
+  
+  cout << "When was it released?" << endl;
+  cin >> tempYear;
+  
+  
+  if (mediaType == 1) {
+    games* vg = new games();
+    mediaList.push_back(vg);
+    cout << "Making Game." << endl;
+    vg -> newTitle(tempTitle.data());
+    vg -> newYear(tempYear);
+    cout << "What was its review score?" << endl;
+    cin >> intput;
+    vg -> newRating(intput);
+    cout << "Who published this?" << endl;
+    cin >> input;
+    vg -> newPublisher(input.data());
+
+    cout << vg->getTitle() << " (" << vg->getYear() << ")" << endl;
+      cout << "Published by: " << vg->getPublisher() << ", Rated " << vg->getRating() << endl;
+  }
+  if (mediaType == 2) {
+    movies* f = new movies();
+    mediaList.push_back(f);
+    cout << "Making Film." << endl;
+    f -> newTitle(tempTitle.data());
+    f -> newYear(tempYear);
+    cout << "Who directed it?" << endl;
+    cin >> input;
+    f -> newDirector(input.data());
+    cout << "What was its review score?" << endl;
+    cin >> intput;
+    f -> newRating(intput);
+    cout << "In minutes, how long is it?" << endl;
+    cin >> intput;
+    f -> newDuration(intput);
+
+    cout << f->getTitle() << " (" << f->getYear() << ")" << endl;
+      cout << "Directed by: " << f->getDirector() << ", Rated " << f->getRating() << ", Duration: " << f->getDuration() << endl;
+  }
+  if (mediaType == 3) {
+    music* s  = new music();
+    mediaList.push_back(s);
+    cout << "Making Song." << endl;
+    s -> newTitle(tempTitle.data());
+    s -> newYear(tempYear);
+    cout << "Who sung it?" << endl;
+    cin >> input;
+    s -> newArtist(input.data());
+    cout << "Who published this?" << endl;
+    cin >> input;
+    s -> newPublisher(input.data());
+    cout << "In minutes, how long is it?" << endl;
+    cin >> intput;
+    s -> newDuration(intput);
+
+    cout << s->getTitle() << " (" << s->getYear() << ")" << endl;
+    cout << "Performed by: " << s->getArtist() << ", Published by: " << s->getPublisher() << ", Duration: " << s->getDuration() << endl;
+  }
+  
+  cout << "Media added." << endl;
+    return;
+}
+
+void printMedia(vector<media*>&mediaList) {
+
+  cout << "Search by title (1) or by year (2)?" << endl;
+  cin >> intput;
+
+  if (intput == 1) {
+    cout << "Search for a title:" << endl;
+    cin >> input;
+    cout << "All Media with that title:" << endl;
+    for (pointer = mediaList.begin(); pointer < mediaList.end(); pointer++) {
+      if (input == (*pointer) -> getTitle()) {
+	cout << (*pointer) -> getTitle() << " (" << (*pointer) -> getYear() << ")" << endl;
+      }
+    }
+  }
+  else if (intput == 2) {
+    cout << "Search for a year:" << endl;
+    cin >> intput;
+    cout << "All Media with that year:" << endl;
+    for (pointer = mediaList.begin(); pointer < mediaList.end(); pointer++) {
+      if (intput == (*pointer) -> getYear()) {
+	cout << (*pointer) -> getTitle() << " (" << (*pointer) -> getYear() << ")" << endl;
+      }
+    }
+  }
+}
+
+void deleteMedia() {
+
+  cout << "Deleted." << endl;
+  
+}
